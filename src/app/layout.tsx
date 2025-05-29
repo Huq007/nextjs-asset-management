@@ -1,6 +1,6 @@
 "use client";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { useState } from "react";
 import {
@@ -23,14 +23,10 @@ import { motion } from "motion/react";
 import { cn } from "../lib/utils";
 import Link from "next/link";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
 export default function RootLayout({
@@ -108,7 +104,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="h-full">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-full`}>
+      <body className={`${inter.variable} font-sans antialiased h-full`}>
         <div className="flex h-full w-full">
           <Sidebar open={open} setOpen={setOpen}>
             <SidebarBody className="justify-between gap-10">

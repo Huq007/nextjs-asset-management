@@ -80,7 +80,7 @@ export default function ReportsPage() {
                   {report.description}
                 </p>
               </div>
-              <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+              <span className="rounded-full bg-[#067957]/10 px-2 py-1 text-xs font-medium text-[#067957] dark:bg-[#067957]/20 dark:text-[#067957]">
                 {report.type}
               </span>
             </div>
@@ -88,7 +88,7 @@ export default function ReportsPage() {
               <span>{report.size}</span>
               <span>{report.lastUpdated}</span>
             </div>
-            <button className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
+            <button className="mt-2 flex items-center justify-center gap-2 rounded-lg bg-[#067957] px-4 py-2 text-sm font-medium text-white hover:bg-[#067957]/90 dark:bg-[#067957] dark:hover:bg-[#067957]/90">
               <IconDownload className="h-4 w-4" />
               Download
             </button>

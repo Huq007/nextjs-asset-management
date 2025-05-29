@@ -1,6 +1,6 @@
 "use client";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { useState } from "react";
 import {
@@ -23,11 +23,13 @@ import { motion } from "motion/react";
 import { cn } from "../lib/utils";
 import Link from "next/link";
 
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
+const montserrat = Montserrat({
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-roboto',
+  variable: '--font-montserrat',
+  preload: true,
+  fallback: ['system-ui', 'arial'],
 });
 
 export default function RootLayout({
@@ -42,70 +44,70 @@ export default function RootLayout({
       label: "Dashboard",
       href: "/",
       icon: (
-        <IconHome className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconHome className="h-5 w-5 shrink-0 text-blue-500 dark:text-blue-400" />
       ),
     },
     {
       label: "Assets",
       href: "/assets",
       icon: (
-        <IconDevices className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconDevices className="h-5 w-5 shrink-0 text-emerald-500 dark:text-emerald-400" />
       ),
     },
     {
       label: "Employees",
       href: "/employees",
       icon: (
-        <IconUsers className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconUsers className="h-5 w-5 shrink-0 text-purple-500 dark:text-purple-400" />
       ),
     },
     {
       label: "Departments",
       href: "/departments",
       icon: (
-        <IconBuilding className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconBuilding className="h-5 w-5 shrink-0 text-amber-500 dark:text-amber-400" />
       ),
     },
     {
       label: "Reports",
       href: "/reports",
       icon: (
-        <IconReportAnalytics className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconReportAnalytics className="h-5 w-5 shrink-0 text-rose-500 dark:text-rose-400" />
       ),
     },
     {
       label: "Analytics",
       href: "/analytics",
       icon: (
-        <IconFileAnalytics className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconFileAnalytics className="h-5 w-5 shrink-0 text-cyan-500 dark:text-cyan-400" />
       ),
     },
     {
       label: "Finance",
       href: "/finance",
       icon: (
-        <IconWallet className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconWallet className="h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
       ),
     },
     {
       label: "Settings",
       href: "/settings",
       icon: (
-        <IconSettings className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconSettings className="h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400" />
       ),
     },
     {
       label: "Logout",
       href: "#",
       icon: (
-        <IconLogout className="h-5 w-5 shrink-0 text-primary-light dark:text-primary-light" />
+        <IconLogout className="h-5 w-5 shrink-0 text-red-500 dark:text-red-400" />
       ),
     },
   ];
 
   return (
-    <html lang="en" className="h-full">
-      <body className={`${roboto.variable} font-sans antialiased h-full`}>
+    <html lang="en" className={`h-full ${montserrat.variable}`}>
+      <body className="font-montserrat antialiased h-full">
         <div className="flex h-full w-full">
           <Sidebar open={open} setOpen={setOpen}>
             <SidebarBody className="justify-between gap-10">

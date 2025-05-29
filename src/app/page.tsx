@@ -1,6 +1,16 @@
 "use client";
 import React from "react";
-import { IconArrowUpRight, IconClock, IconDeviceLaptop, IconDeviceMobile, IconDeviceTablet, IconPrinter } from "@tabler/icons-react";
+import {
+  IconArrowUpRight,
+  IconClock,
+  IconDeviceLaptop,
+  IconDeviceMobile,
+  IconDeviceTablet,
+  IconPrinter,
+  IconUsers,
+  IconBuilding,
+  IconWallet,
+} from "@tabler/icons-react";
 import { motion } from "motion/react";
 
 export default function Page() {
@@ -92,33 +102,84 @@ export default function Page() {
     <div className="flex h-full w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {[
-          { title: "Total Assets", value: "1,234", change: "+12%", color: "from-indigo-500 to-purple-500" },
-          { title: "Active Users", value: "456", change: "+8%", color: "from-emerald-500 to-teal-500" },
-          { title: "Departments", value: "12", change: "+2", color: "from-rose-500 to-pink-500" },
-          { title: "Total Value", value: "$2.4M", change: "+15%", color: "from-amber-500 to-orange-500" },
+          {
+            title: "Total Assets",
+            value: "1,234",
+            change: "+12%",
+            color: "from-indigo-500 to-purple-500",
+            icon: <IconDeviceLaptop className="h-6 w-6 text-white" />,
+            bgColor: "bg-indigo-500 dark:bg-indigo-900",
+          },
+          {
+            title: "Active Users",
+            value: "456",
+            change: "+8%",
+            color: "from-emerald-500 to-teal-500",
+            icon: <IconUsers className="h-6 w-6 text-white" />,
+            bgColor: "bg-emerald-500 dark:bg-emerald-900",
+          },
+          {
+            title: "Departments",
+            value: "12",
+            change: "+2",
+            color: "from-rose-500 to-pink-500",
+            icon: <IconBuilding className="h-6 w-6 text-white" />,
+            bgColor: "bg-rose-500 dark:bg-rose-900",
+          },
+          {
+            title: "Total Value",
+            value: "$2.4M",
+            change: "+15%",
+            color: "from-amber-500 to-orange-500",
+            icon: <IconWallet className="h-6 w-6 text-white" />,
+            bgColor: "bg-amber-500 dark:bg-amber-900",
+          },
         ].map((stat, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ scale: 1.02 }}
-            className="relative overflow-hidden rounded-xl bg-gradient-to-br p-6 shadow-lg transition-all duration-200 hover:shadow-xl"
-            style={{
-              backgroundImage: `linear-gradient(to bottom right, ${stat.color.split(' ')[1]}, ${stat.color.split(' ')[3]})`,
-            }}
+            whileHover={{ scale: 1.02, y: -5 }}
+            className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-200 hover:shadow-xl dark:bg-neutral-800"
           >
-            <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+            {/* Background gradient */}
+            <div
+              className="absolute inset-0 bg-gradient-to-br opacity-5"
+              style={{
+                backgroundImage: `linear-gradient(to bottom right, ${
+                  stat.color.split(" ")[1]
+                }, ${stat.color.split(" ")[3]})`,
+              }}
+            />
+
+            {/* Content */}
             <div className="relative z-10">
-              <h3 className="text-sm font-medium text-white/90">
-                {stat.title}
-              </h3>
-              <div className="mt-2 flex items-baseline justify-between">
-                <p className="text-2xl font-semibold text-white">
-                  {stat.value}
-                </p>
-                <span className="flex items-center text-sm font-medium text-white/90">
+              <div className="flex items-center justify-between">
+                <div className={`rounded-lg p-2 ${stat.bgColor} shadow-sm`}>
+                  {stat.icon}
+                </div>
+                <span className="flex items-center text-sm font-medium text-primary dark:text-primary-light">
                   <IconArrowUpRight className="mr-1 h-4 w-4" />
                   {stat.change}
                 </span>
               </div>
+
+              <div className="mt-4">
+                <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                  {stat.title}
+                </h3>
+                <p className="mt-1 text-2xl font-semibold text-neutral-900 dark:text-white">
+                  {stat.value}
+                </p>
+              </div>
+
+              {/* Hover effect line */}
+              <div
+                className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r transition-all duration-300 group-hover:w-full"
+                style={{
+                  backgroundImage: `linear-gradient(to right, ${
+                    stat.color.split(" ")[1]
+                  }, ${stat.color.split(" ")[3]})`,
+                }}
+              />
             </div>
           </motion.div>
         ))}
@@ -137,7 +198,9 @@ export default function Page() {
                 whileHover={{ scale: 1.01 }}
                 className="group flex items-start gap-4 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800"
               >
-                <div className={`rounded-lg p-2.5 ${activity.color} shadow-md transition-transform duration-200 group-hover:scale-110`}>
+                <div
+                  className={`rounded-lg p-2.5 ${activity.color} shadow-md transition-transform duration-200 group-hover:scale-110`}
+                >
                   {activity.icon}
                 </div>
                 <div className="flex-1">
@@ -172,7 +235,9 @@ export default function Page() {
               <div key={idx} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className={`rounded-lg bg-gradient-to-r p-2 ${asset.color} shadow-md`}>
+                    <div
+                      className={`rounded-lg bg-gradient-to-r p-2 ${asset.color} shadow-md`}
+                    >
                       {asset.icon}
                     </div>
                     <span className="font-medium text-neutral-900 dark:text-white">

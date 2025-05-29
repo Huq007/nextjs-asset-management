@@ -1,6 +1,21 @@
 "use client";
 import React from "react";
 import { IconCalendar, IconChartBar, IconChartLine, IconChartPie } from "@tabler/icons-react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  Legend
+} from "recharts";
 
 export default function AnalyticsPage() {
   const metrics = [
@@ -8,7 +23,7 @@ export default function AnalyticsPage() {
       title: "Asset Utilization",
       value: "78%",
       change: "+5%",
-      icon: <IconChartBar className="h-5 w-5 text-blue-500" />,
+      icon: <IconChartBar className="h-5 w-5 text-[#067957]" />,
     },
     {
       title: "Maintenance Cost",
@@ -22,6 +37,34 @@ export default function AnalyticsPage() {
       change: "+3%",
       icon: <IconChartPie className="h-5 w-5 text-purple-500" />,
     },
+  ];
+
+  // Sample data for asset utilization trend
+  const utilizationData = [
+    { month: "Jan", utilization: 65 },
+    { month: "Feb", utilization: 68 },
+    { month: "Mar", utilization: 72 },
+    { month: "Apr", utilization: 75 },
+    { month: "May", utilization: 78 },
+    { month: "Jun", utilization: 82 },
+  ];
+
+  // Sample data for department distribution
+  const departmentData = [
+    { name: "IT", value: 35 },
+    { name: "HR", value: 15 },
+    { name: "Finance", value: 20 },
+    { name: "Operations", value: 30 },
+  ];
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  // Sample data for asset performance metrics
+  const performanceData = [
+    { category: "Laptops", active: 85, maintenance: 10, inactive: 5 },
+    { category: "Mobile", active: 90, maintenance: 5, inactive: 5 },
+    { category: "Tablets", active: 75, maintenance: 15, inactive: 10 },
+    { category: "Printers", active: 80, maintenance: 12, inactive: 8 },
   ];
 
   return (
@@ -73,8 +116,30 @@ export default function AnalyticsPage() {
           <h3 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
             Asset Utilization Trend
           </h3>
-          <div className="h-64 w-full animate-pulse rounded-lg bg-neutral-100 dark:bg-neutral-700">
-            {/* Placeholder for chart */}
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={utilizationData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <XAxis dataKey="month" stroke="#6B7280" />
+                <YAxis stroke="#6B7280" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    border: "none",
+                    borderRadius: "0.5rem",
+                    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="utilization"
+                  stroke="#067957"
+                  strokeWidth={2}
+                  dot={{ fill: "#067957", strokeWidth: 2 }}
+                  activeDot={{ r: 6, fill: "#067957" }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
@@ -82,8 +147,33 @@ export default function AnalyticsPage() {
           <h3 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
             Department Distribution
           </h3>
-          <div className="h-64 w-full animate-pulse rounded-lg bg-neutral-100 dark:bg-neutral-700">
-            {/* Placeholder for chart */}
+          <div className="h-64 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={departmentData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                >
+                  {departmentData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgba(255, 255, 255, 0.9)",
+                    border: "none",
+                    borderRadius: "0.5rem",
+                    boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </div>
       </div>
@@ -92,8 +182,26 @@ export default function AnalyticsPage() {
         <h3 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
           Asset Performance Metrics
         </h3>
-        <div className="h-96 w-full animate-pulse rounded-lg bg-neutral-100 dark:bg-neutral-700">
-          {/* Placeholder for detailed metrics chart */}
+        <div className="h-96 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={performanceData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+              <XAxis dataKey="category" stroke="#6B7280" />
+              <YAxis stroke="#6B7280" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                  border: "none",
+                  borderRadius: "0.5rem",
+                  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+                }}
+              />
+              <Legend />
+              <Bar dataKey="active" name="Active" fill="#067957" />
+              <Bar dataKey="maintenance" name="Maintenance" fill="#F59E0B" />
+              <Bar dataKey="inactive" name="Inactive" fill="#EF4444" />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>

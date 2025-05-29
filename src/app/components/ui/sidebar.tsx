@@ -88,11 +88,12 @@ export const DesktopSidebar = ({
     <>
       <motion.div
         className={cn(
-          "h-full px-4 py-4 hidden  md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] shrink-0",
+          "h-full px-4 py-4 hidden md:flex md:flex-col w-[300px] shrink-0",
+          "dark:bg-[#067958]/30",
           className
         )}
         animate={{
-          width: animate ? (open ? "300px" : "60px") : "300px",
+          width: animate ? (open ? "240px" : "80px") : "300px",
         }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -114,7 +115,7 @@ export const MobileSidebar = ({
     <>
       <div
         className={cn(
-          "h-14 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md w-full border-b border-neutral-200 dark:border-neutral-800",
+          "h-14 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-[#067958]/20 dark:bg-[#067958]/30 backdrop-blur-md w-full border-b border-[#067958]/10 dark:border-[#067958]/20",
           className
         )}
         {...props}
@@ -124,9 +125,9 @@ export const MobileSidebar = ({
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setOpen(!open)}
-            className="p-2 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 dark:from-primary/20 dark:to-secondary/20 dark:hover:from-primary/30 dark:hover:to-secondary/30 transition-all duration-200"
+            className="p-2 rounded-lg bg-[#067958]/10 hover:bg-[#067958]/20 dark:bg-[#067958]/20 dark:hover:bg-[#067958]/30 transition-all duration-200"
           >
-            <IconMenu2 className="h-6 w-6 text-primary dark:text-primary-light" />
+            <IconMenu2 className="h-6 w-6 text-black dark:text-white" />
           </motion.button>
         </div>
         <AnimatePresence>
@@ -141,7 +142,7 @@ export const MobileSidebar = ({
                 damping: 30
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-[#067958]/20 dark:bg-[#067958]/30 backdrop-blur-md p-10 z-[100] flex flex-col justify-between",
                 className
               )}
             >
@@ -150,9 +151,9 @@ export const MobileSidebar = ({
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setOpen(!open)}
-                  className="p-2 rounded-lg bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 dark:from-primary/20 dark:to-secondary/20 dark:hover:from-primary/30 dark:hover:to-secondary/30 transition-all duration-200"
+                  className="p-2 rounded-lg bg-[#067958]/10 hover:bg-[#067958]/20 dark:bg-[#067958]/20 dark:hover:bg-[#067958]/30 transition-all duration-200"
                 >
-                  <IconX className="h-6 w-6 text-primary dark:text-primary-light" />
+                  <IconX className="h-6 w-6 text-black dark:text-white" />
                 </motion.button>
               </div>
               {children}
@@ -179,14 +180,18 @@ export const SidebarLink = ({
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
-      <div className="absolute -inset-2 rounded-lg bg-gradient-to-r from-primary/10 via-secondary/5 to-primary/10 opacity-0 transition-opacity group-hover:opacity-100" />
       <a
         href={link.href}
         className={cn(
           "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
-          "text-neutral-700 hover:text-primary dark:text-neutral-200 dark:hover:text-primary-light",
-          "hover:bg-gradient-to-r hover:from-primary/5 hover:to-secondary/5 dark:hover:from-primary/10 dark:hover:to-secondary/10",
+          "text-black dark:text-white",
+          "hover:bg-[#067958]/40 dark:hover:bg-[#067958]/40",
           "backdrop-blur-sm",
+          "before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-[#067958]/0 before:to-[#067958]/0",
+          "before:transition-all before:duration-300",
+          "hover:before:from-[#067958]/10 hover:before:to-[#067958]/20",
+          "after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:h-0 after:w-1 after:rounded-r-full after:bg-[#067958] after:transition-all after:duration-300",
+          "hover:after:h-8",
           className
         )}
         {...props}
@@ -194,7 +199,7 @@ export const SidebarLink = ({
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          className="text-primary dark:text-primary-light"
+          className="text-black dark:text-white"
         >
           {link.icon}
         </motion.div>

@@ -157,7 +157,7 @@ export default function SettingsPage() {
           <button className="rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700">
             Cancel
           </button>
-          <button className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600">
+          <button className="rounded-lg bg-[#067957] px-4 py-2 text-sm font-medium text-white hover:bg-[#067957]/90 dark:bg-[#067957] dark:hover:bg-[#067957]/90">
             Save Changes
           </button>
         </div>
@@ -191,7 +191,7 @@ export default function SettingsPage() {
                     <button
                       className={`relative inline-flex h-6 w-11 items-center rounded-full ${
                         setting.value === "Enabled"
-                          ? "bg-blue-600"
+                          ? "bg-[#067957]"
                           : "bg-neutral-200 dark:bg-neutral-700"
                       }`}
                     >

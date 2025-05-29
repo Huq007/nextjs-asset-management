@@ -164,15 +164,21 @@ const Logo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-primary"
+      className="relative z-20 flex flex-col items-center py-4"
     >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-primary" />
+      <Image
+        src="/logo.png"
+        alt="Asset Manager Logo"
+        width={64}
+        height={64}
+        className="h-16 w-16"
+      />
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="font-medium whitespace-pre text-primary"
+        className="mt-2 text-base font-bold uppercase tracking-wide text-primary"
       >
-        Asset Manager
+        Asset Management
       </motion.span>
     </a>
   );
@@ -182,9 +188,15 @@ const LogoIcon = () => {
   return (
     <a
       href="#"
-      className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-primary"
+      className="relative z-20 flex items-center justify-center py-4"
     >
-      <div className="h-5 w-6 shrink-0 rounded-tl-lg rounded-tr-sm rounded-br-lg rounded-bl-sm bg-primary" />
+      <Image
+        src="/logo.png"
+        alt="Asset Manager Logo"
+        width={40}
+        height={40}
+        className="h-10 w-10"
+      />
     </a>
   );
 };

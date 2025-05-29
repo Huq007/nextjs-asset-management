@@ -243,7 +243,7 @@ export default function Page() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: idx * 0.1 }}
-                className="flex items-start gap-3 rounded-xl border border-neutral-200 bg-gradient-to-br from-emerald-100/80 to-emerald-50/50 p-3 shadow-sm dark:from-emerald-900/40 dark:to-emerald-800/30 dark:border-neutral-700"
+                className="flex items-start gap-3 rounded-xl border border-neutral-200 bg-gradient-to-br from-indigo-100/80 to-indigo-50/50 p-2.5 shadow-sm dark:from-indigo-900/40 dark:to-indigo-800/30 dark:border-neutral-700"
               >
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-neutral-50 dark:bg-neutral-700">
                   {activity.icon}

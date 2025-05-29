@@ -583,124 +583,128 @@ export default function EmployeesPage() {
         </select>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800/50">
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Employee ID
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Name
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Position
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Department
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Status
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Join Date
-                </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
-              {currentEmployees.map((employee, idx) => (
-                <motion.tr
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: idx * 0.1 }}
-                  className="group cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
-                  onClick={() => handleViewDetails(employee)}
-                >
-                  <td className="px-6 py-4 text-sm font-medium text-neutral-900 dark:text-white">
-                    {employee.id}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-3">
-                      <div className="relative h-8 w-8 overflow-hidden rounded-full bg-gradient-to-br from-[#067957] to-[#0a9c6f] p-0.5">
-                        <div className="h-full w-full overflow-hidden rounded-full bg-white dark:bg-neutral-800">
-                          <Image
-                            src={employee.avatar}
-                            alt={employee.name}
-                            className="h-full w-full object-cover"
-                            width={32}
-                            height={32}
-                          />
-                        </div>
-                      </div>
-                      <span className="text-sm text-neutral-900 dark:text-white">
-                        {employee.name}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-neutral-900 dark:text-white">
-                    {employee.position}
-                  </td>
-                  <td className="px-6 py-4 text-sm text-neutral-900 dark:text-white">
-                    {employee.department}
-                  </td>
-                  <td className="px-6 py-4">
-                    <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                        employee.status === "Active"
-                          ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
-                          : "bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200"
-                      }`}
+      <div className="flex flex-1 flex-col gap-4">
+        <div className="flex-1 overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+          <div className="h-full overflow-y-auto">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="sticky top-0 z-10 bg-neutral-50 dark:bg-neutral-800/50">
+                  <tr className="border-b border-neutral-200 dark:border-neutral-700">
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Employee ID
+                    </th>
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Name
+                    </th>
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Position
+                    </th>
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Department
+                    </th>
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Status
+                    </th>
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Join Date
+                    </th>
+                    <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
+                  {currentEmployees.map((employee, idx) => (
+                    <motion.tr
+                      key={idx}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: idx * 0.1 }}
+                      className="group cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
+                      onClick={() => handleViewDetails(employee)}
                     >
-                      {employee.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 text-sm text-neutral-900 dark:text-white">
-                    {employee.joinDate}
-                  </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleViewDetails(employee)}
-                        className="rounded-lg bg-purple-50 p-1.5 text-purple-600 transition-colors hover:bg-purple-100 dark:bg-purple-900/30 dark:text-purple-400 dark:hover:bg-purple-900/50"
-                      >
-                        <IconEye className="h-4 w-4" />
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="rounded-lg bg-[#067957]/10 p-1.5 text-[#067957] transition-colors hover:bg-[#067957]/20 dark:bg-[#067957]/20 dark:text-[#067957] dark:hover:bg-[#067957]/30"
-                      >
-                        <IconEdit className="h-4 w-4" />
-                      </motion.button>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="rounded-lg bg-rose-50 p-1.5 text-rose-600 transition-colors hover:bg-rose-100 dark:bg-rose-900/30 dark:text-rose-400 dark:hover:bg-rose-900/50"
-                      >
-                        <IconTrash className="h-4 w-4" />
-                      </motion.button>
-                    </div>
-                  </td>
-                </motion.tr>
-              ))}
-            </tbody>
-          </table>
+                      <td className="px-6 py-3 text-sm font-medium text-neutral-900 dark:text-white">
+                        {employee.id}
+                      </td>
+                      <td className="px-6 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="relative h-7 w-7 overflow-hidden rounded-full bg-gradient-to-br from-[#067957] to-[#0a9c6f] p-0.5">
+                            <div className="h-full w-full overflow-hidden rounded-full bg-white dark:bg-neutral-800">
+                              <Image
+                                src={employee.avatar}
+                                alt={employee.name}
+                                className="h-full w-full object-cover"
+                                width={28}
+                                height={28}
+                              />
+                            </div>
+                          </div>
+                          <span className="text-sm text-neutral-900 dark:text-white">
+                            {employee.name}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="px-6 py-3 text-sm text-neutral-900 dark:text-white">
+                        {employee.position}
+                      </td>
+                      <td className="px-6 py-3 text-sm text-neutral-900 dark:text-white">
+                        {employee.department}
+                      </td>
+                      <td className="px-6 py-3">
+                        <span
+                          className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
+                            employee.status === "Active"
+                              ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                              : "bg-neutral-100 text-neutral-800 dark:bg-neutral-700 dark:text-neutral-200"
+                          }`}
+                        >
+                          {employee.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-3 text-sm text-neutral-900 dark:text-white">
+                        {employee.joinDate}
+                      </td>
+                      <td className="px-6 py-3">
+                        <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => handleViewDetails(employee)}
+                            className="rounded-lg bg-purple-50 p-1.5 text-purple-600 transition-colors hover:bg-purple-100 dark:bg-purple-900/30 dark:text-purple-400 dark:hover:bg-purple-900/50"
+                          >
+                            <IconEye className="h-4 w-4" />
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="rounded-lg bg-[#067957]/10 p-1.5 text-[#067957] transition-colors hover:bg-[#067957]/20 dark:bg-[#067957]/20 dark:text-[#067957] dark:hover:bg-[#067957]/30"
+                          >
+                            <IconEdit className="h-4 w-4" />
+                          </motion.button>
+                          <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            className="rounded-lg bg-rose-50 p-1.5 text-rose-600 transition-colors hover:bg-rose-100 dark:bg-rose-900/30 dark:text-rose-400 dark:hover:bg-rose-900/50"
+                          >
+                            <IconTrash className="h-4 w-4" />
+                          </motion.button>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div className="flex items-center justify-between">
-        <div className="text-sm text-neutral-600 dark:text-neutral-400">
-          Showing {startIndex + 1} to {endIndex} of {employees.length} entries
-        </div>
-        <div className="flex items-center gap-2">
-          {renderPaginationButtons()}
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-neutral-600 dark:text-neutral-400">
+            Showing {startIndex + 1} to {endIndex} of {employees.length} entries
+          </div>
+          <div className="flex items-center gap-2">
+            {renderPaginationButtons()}
+          </div>
         </div>
       </div>
 

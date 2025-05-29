@@ -11,7 +11,6 @@ import {
   IconDeviceMobile,
   IconDeviceTablet,
   IconPrinter,
-  IconDotsVertical,
   IconCar,
   IconTable,
   IconServer,
@@ -454,25 +453,25 @@ export default function AssetsPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800/50">
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Asset ID
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Name
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Category
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Status
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Assigned To
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Purchase Date
                 </th>
-                <th className="px-6 py-4 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                <th className="px-6 py-3.5 text-left text-sm font-medium text-neutral-600 dark:text-neutral-400">
                   Actions
                 </th>
               </tr>
@@ -487,13 +486,13 @@ export default function AssetsPage() {
                   className="group cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
                   onClick={() => handleViewDetails(asset)}
                 >
-                  <td className="px-6 py-4 text-sm font-medium text-neutral-900 dark:text-white">
+                  <td className="px-6 py-3 text-sm font-medium text-neutral-900 dark:text-white">
                     {asset.id}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-3">
                     <div className="flex items-center gap-3">
                       <div
-                        className={`flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${asset.gradient} text-white shadow-sm`}
+                        className={`flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br ${asset.gradient} text-white shadow-sm`}
                       >
                         {asset.icon}
                       </div>
@@ -502,12 +501,12 @@ export default function AssetsPage() {
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 text-sm text-neutral-900 dark:text-white">
+                  <td className="px-6 py-3 text-sm text-neutral-900 dark:text-white">
                     {asset.category}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-3">
                     <span
-                      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                      className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
                         asset.status === "Active"
                           ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
                           : asset.status === "In Use"
@@ -520,14 +519,17 @@ export default function AssetsPage() {
                       {asset.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-neutral-900 dark:text-white">
+                  <td className="px-6 py-3 text-sm text-neutral-900 dark:text-white">
                     {asset.assignedTo}
                   </td>
-                  <td className="px-6 py-4 text-sm text-neutral-900 dark:text-white">
+                  <td className="px-6 py-3 text-sm text-neutral-900 dark:text-white">
                     {asset.purchaseDate}
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                  <td className="px-6 py-3">
+                    <div
+                      className="flex items-center gap-2"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}

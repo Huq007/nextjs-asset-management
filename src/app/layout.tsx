@@ -2,11 +2,7 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { useState } from "react";
-import {
-  Sidebar,
-  SidebarBody,
-  SidebarLink,
-} from "./components/ui/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "./components/ui/sidebar";
 import {
   IconBuilding,
   IconDevices,
@@ -23,12 +19,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 const montserrat = Montserrat({
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-montserrat',
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
   preload: true,
-  fallback: ['system-ui', 'arial'],
+  fallback: ["system-ui", "arial"],
 });
 
 export default function RootLayout({
@@ -43,63 +39,81 @@ export default function RootLayout({
       label: "Dashboard",
       href: "/",
       icon: (
-        <IconHome className="h-5 w-5 shrink-0 text-blue-500 dark:text-blue-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
+          <IconHome className="h-5 w-5 shrink-0 text-blue-500 dark:text-blue-400" />
+        </div>
       ),
     },
     {
       label: "Assets",
       href: "/assets",
       icon: (
-        <IconDevices className="h-5 w-5 shrink-0 text-emerald-500 dark:text-emerald-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30">
+          <IconDevices className="h-5 w-5 shrink-0 text-emerald-500 dark:text-emerald-400" />
+        </div>
       ),
     },
     {
       label: "Employees",
       href: "/employees",
       icon: (
-        <IconUsers className="h-5 w-5 shrink-0 text-purple-500 dark:text-purple-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-purple-50 dark:bg-purple-900/30">
+          <IconUsers className="h-5 w-5 shrink-0 text-purple-500 dark:text-purple-400" />
+        </div>
       ),
     },
     {
       label: "Departments",
       href: "/departments",
       icon: (
-        <IconBuilding className="h-5 w-5 shrink-0 text-amber-500 dark:text-amber-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-50 dark:bg-amber-900/30">
+          <IconBuilding className="h-5 w-5 shrink-0 text-amber-500 dark:text-amber-400" />
+        </div>
       ),
     },
     {
       label: "Reports",
       href: "/reports",
       icon: (
-        <IconReportAnalytics className="h-5 w-5 shrink-0 text-rose-500 dark:text-rose-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-rose-100 dark:bg-rose-900/30">
+          <IconReportAnalytics className="h-5 w-5 shrink-0 text-rose-500 dark:text-rose-400" />
+        </div>
       ),
     },
     {
       label: "Analytics",
       href: "/analytics",
       icon: (
-        <IconFileAnalytics className="h-5 w-5 shrink-0 text-cyan-500 dark:text-cyan-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-100 dark:bg-cyan-900/30">
+          <IconFileAnalytics className="h-5 w-5 shrink-0 text-cyan-500 dark:text-cyan-400" />
+        </div>
       ),
     },
     {
       label: "Finance",
       href: "/finance",
       icon: (
-        <IconWallet className="h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/30">
+          <IconWallet className="h-5 w-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+        </div>
       ),
     },
     {
       label: "Settings",
       href: "/settings",
       icon: (
-        <IconSettings className="h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-900/30">
+          <IconSettings className="h-5 w-5 shrink-0 text-slate-500 dark:text-slate-400" />
+        </div>
       ),
     },
     {
       label: "Logout",
       href: "#",
       icon: (
-        <IconLogout className="h-5 w-5 shrink-0 text-red-500 dark:text-red-400" />
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+          <IconLogout className="h-5 w-5 shrink-0 text-red-500 dark:text-red-400" />
+        </div>
       ),
     },
   ];
@@ -114,11 +128,7 @@ export default function RootLayout({
                 {open ? <Logo /> : <LogoIcon />}
                 <div className="mt-8 flex flex-col gap-2">
                   {links.map((link, idx) => (
-                    <Link 
-                      key={idx} 
-                      href={link.href}
-                      className="block"
-                    >
+                    <Link key={idx} href={link.href} className="block">
                       <SidebarLink link={link} />
                     </Link>
                   ))}
@@ -143,9 +153,7 @@ export default function RootLayout({
               </div>
             </SidebarBody>
           </Sidebar>
-          <main className="flex-1 overflow-auto">
-            {children}
-          </main>
+          <main className="flex-1 overflow-auto">{children}</main>
         </div>
       </body>
     </html>

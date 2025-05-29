@@ -1,5 +1,4 @@
 "use client";
-import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { useState } from "react";
@@ -20,8 +19,8 @@ import {
   IconWallet,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
-import { cn } from "../lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 const montserrat = Montserrat({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -115,7 +114,11 @@ export default function RootLayout({
                 {open ? <Logo /> : <LogoIcon />}
                 <div className="mt-8 flex flex-col gap-2">
                   {links.map((link, idx) => (
-                    <Link key={idx} href={link.href}>
+                    <Link 
+                      key={idx} 
+                      href={link.href}
+                      className="block"
+                    >
                       <SidebarLink link={link} />
                     </Link>
                   ))}
@@ -127,11 +130,11 @@ export default function RootLayout({
                     label: "Admin User",
                     href: "#",
                     icon: (
-                      <img
+                      <Image
                         src="https://assets.aceternity.com/manu.png"
                         className="h-7 w-7 shrink-0 rounded-full"
-                        width={50}
-                        height={50}
+                        width={28}
+                        height={28}
                         alt="Avatar"
                       />
                     ),

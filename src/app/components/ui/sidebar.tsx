@@ -2,7 +2,10 @@
 import { cn } from "@/lib/utils";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { IconMenu2, IconX, IconChevronLeft } from "@tabler/icons-react";
+import {
+  IconX,
+  IconMenu2,
+} from "@tabler/icons-react";
 
 interface Links {
   label: string;
@@ -180,8 +183,9 @@ export const SidebarLink = ({
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
-      <a
-        href={link.href}
+      <div
+        role="button"
+        tabIndex={0}
         className={cn(
           "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
           "text-black dark:text-white",
@@ -192,6 +196,7 @@ export const SidebarLink = ({
           "hover:before:from-[#067958]/10 hover:before:to-[#067958]/20",
           "after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:h-0 after:w-1 after:rounded-r-full after:bg-[#067958] after:transition-all after:duration-300",
           "hover:after:h-8",
+          "cursor-pointer",
           className
         )}
         {...props}
@@ -212,7 +217,7 @@ export const SidebarLink = ({
         >
           {link.label}
         </motion.span>
-      </a>
+      </div>
     </motion.div>
   );
 };

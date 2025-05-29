@@ -1,6 +1,11 @@
 "use client";
 import React from "react";
-import { IconBell, IconLock, IconMoon, IconPalette, IconUser, IconWorld } from "@tabler/icons-react";
+import {
+  IconBell,
+  IconLock,
+  IconUser,
+  IconLanguage,
+} from "@tabler/icons-react";
 
 type BaseSetting = {
   name: string;
@@ -105,7 +110,7 @@ export default function SettingsPage() {
     },
     {
       title: "Appearance",
-      icon: <IconPalette className="h-5 w-5 text-purple-500" />,
+      icon: <IconLanguage className="h-5 w-5 text-purple-500" />,
       settings: [
         {
           name: "Theme",
@@ -123,7 +128,7 @@ export default function SettingsPage() {
     },
     {
       title: "Language & Region",
-      icon: <IconWorld className="h-5 w-5 text-green-500" />,
+      icon: <IconLanguage className="h-5 w-5 text-green-500" />,
       settings: [
         {
           name: "Language",
@@ -236,4 +241,4 @@ export default function SettingsPage() {
       </div>
     </div>
   );
-} 
+}

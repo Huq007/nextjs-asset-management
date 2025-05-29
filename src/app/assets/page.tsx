@@ -139,12 +139,8 @@ export default function AssetsPage() {
   const renderPaginationButtons = () => {
     const buttons = [];
     const maxVisiblePages = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-    if (endPage - startPage + 1 < maxVisiblePages) {
-      startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
+    const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
     // Previous button
     buttons.push(
@@ -194,9 +190,9 @@ export default function AssetsPage() {
           whileTap={{ scale: 0.98 }}
           onClick={() => handlePageChange(i)}
           className={`rounded-lg border px-3 py-2 text-sm font-medium shadow-sm transition-all duration-200 ${
-            currentPage === i
-              ? 'border-[#067957] bg-[#067957] text-white'
-              : 'border-neutral-200 bg-white text-neutral-700 hover:border-[#067957] hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200'
+            i === currentPage
+              ? "border-[#067957] bg-[#067957] text-white"
+              : "border-neutral-200 bg-white text-neutral-700 hover:border-[#067957] hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200"
           }`}
         >
           {i}

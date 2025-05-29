@@ -2,6 +2,7 @@
 import React from "react";
 import { IconPlus, IconSearch, IconEye, IconEdit, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 
 export default function EmployeesPage() {
   return (
@@ -47,10 +48,12 @@ export default function EmployeesPage() {
           >
             <div className="relative h-12 w-12 overflow-hidden rounded-full bg-gradient-to-br from-[#067957] to-[#0a9c6f] p-0.5">
               <div className="h-full w-full overflow-hidden rounded-full bg-white dark:bg-neutral-800">
-                <img
+                <Image
                   src={`https://i.pravatar.cc/150?img=${idx + 1}`}
                   alt="Employee"
                   className="h-full w-full object-cover"
+                  width={48}
+                  height={48}
                 />
               </div>
             </div>

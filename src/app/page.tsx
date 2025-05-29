@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { IconArrowUpRight, IconClock, IconDeviceLaptop, IconDeviceMobile, IconDeviceTablet, IconPrinter } from "@tabler/icons-react";
+import { motion } from "motion/react";
 
 export default function Page() {
   const recentActivities = [
@@ -11,7 +12,8 @@ export default function Page() {
       asset: "MacBook Pro 2023",
       department: "Engineering",
       time: "2 hours ago",
-      icon: <IconDeviceLaptop className="h-5 w-5 text-blue-500" />,
+      icon: <IconDeviceLaptop className="h-5 w-5 text-white" />,
+      color: "bg-gradient-to-r from-indigo-500 to-purple-500",
     },
     {
       id: 2,
@@ -20,7 +22,8 @@ export default function Page() {
       asset: "iPad Pro",
       department: "Design",
       time: "4 hours ago",
-      icon: <IconDeviceTablet className="h-5 w-5 text-purple-500" />,
+      icon: <IconDeviceTablet className="h-5 w-5 text-white" />,
+      color: "bg-gradient-to-r from-emerald-500 to-teal-500",
     },
     {
       id: 3,
@@ -29,7 +32,8 @@ export default function Page() {
       asset: "HP LaserJet Printer",
       department: "Operations",
       time: "1 day ago",
-      icon: <IconPrinter className="h-5 w-5 text-green-500" />,
+      icon: <IconPrinter className="h-5 w-5 text-white" />,
+      color: "bg-gradient-to-r from-rose-500 to-pink-500",
     },
     {
       id: 4,
@@ -38,7 +42,8 @@ export default function Page() {
       asset: "iPhone 14 Pro",
       department: "Sales",
       time: "1 day ago",
-      icon: <IconDeviceMobile className="h-5 w-5 text-red-500" />,
+      icon: <IconDeviceMobile className="h-5 w-5 text-white" />,
+      color: "bg-gradient-to-r from-blue-500 to-cyan-500",
     },
     {
       id: 5,
@@ -47,7 +52,8 @@ export default function Page() {
       asset: "Dell XPS 15",
       department: "IT",
       time: "2 days ago",
-      icon: <IconDeviceLaptop className="h-5 w-5 text-yellow-500" />,
+      icon: <IconDeviceLaptop className="h-5 w-5 text-white" />,
+      color: "bg-gradient-to-r from-amber-500 to-orange-500",
     },
   ];
 
@@ -56,73 +62,82 @@ export default function Page() {
       category: "Laptops",
       count: 450,
       percentage: 45,
-      color: "bg-blue-500",
+      color: "from-indigo-500 to-purple-500",
+      icon: <IconDeviceLaptop className="h-6 w-6 text-white" />,
     },
     {
       category: "Mobile Devices",
       count: 300,
       percentage: 30,
-      color: "bg-red-500",
+      color: "from-emerald-500 to-teal-500",
+      icon: <IconDeviceMobile className="h-6 w-6 text-white" />,
     },
     {
       category: "Tablets",
       count: 150,
       percentage: 15,
-      color: "bg-purple-500",
+      color: "from-rose-500 to-pink-500",
+      icon: <IconDeviceTablet className="h-6 w-6 text-white" />,
     },
     {
       category: "Printers",
       count: 100,
       percentage: 10,
-      color: "bg-green-500",
+      color: "from-amber-500 to-orange-500",
+      icon: <IconPrinter className="h-6 w-6 text-white" />,
     },
   ];
 
   return (
-    <div className="flex h-full w-full flex-1 flex-col gap-4 rounded-tl-2xl border border-neutral-200 bg-white p-4 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
+    <div className="flex h-full w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         {[
-          { title: "Total Assets", value: "1,234", change: "+12%" },
-          { title: "Active Users", value: "456", change: "+8%" },
-          { title: "Departments", value: "12", change: "+2" },
-          { title: "Total Value", value: "$2.4M", change: "+15%" },
+          { title: "Total Assets", value: "1,234", change: "+12%", color: "from-indigo-500 to-purple-500" },
+          { title: "Active Users", value: "456", change: "+8%", color: "from-emerald-500 to-teal-500" },
+          { title: "Departments", value: "12", change: "+2", color: "from-rose-500 to-pink-500" },
+          { title: "Total Value", value: "$2.4M", change: "+15%", color: "from-amber-500 to-orange-500" },
         ].map((stat, idx) => (
-          <div
+          <motion.div
             key={idx}
-            className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800"
+            whileHover={{ scale: 1.02 }}
+            className="relative overflow-hidden rounded-xl bg-gradient-to-br p-6 shadow-lg transition-all duration-200 hover:shadow-xl"
+            style={{
+              backgroundImage: `linear-gradient(to bottom right, ${stat.color.split(' ')[1]}, ${stat.color.split(' ')[3]})`,
+            }}
           >
-            <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-              {stat.title}
-            </h3>
-            <div className="flex items-baseline justify-between">
-              <p className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                {stat.value}
-              </p>
-              <span className="text-sm font-medium text-green-600 dark:text-green-400">
-                {stat.change}
-              </span>
+            <div className="absolute inset-0 bg-white/10 backdrop-blur-sm" />
+            <div className="relative z-10">
+              <h3 className="text-sm font-medium text-white/90">
+                {stat.title}
+              </h3>
+              <div className="mt-2 flex items-baseline justify-between">
+                <p className="text-2xl font-semibold text-white">
+                  {stat.value}
+                </p>
+                <span className="flex items-center text-sm font-medium text-white/90">
+                  <IconArrowUpRight className="mr-1 h-4 w-4" />
+                  {stat.change}
+                </span>
+              </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
-              Recent Activities
-            </h3>
-            <button className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-              View All
-            </button>
-          </div>
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {/* Recent Activities */}
+        <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+          <h2 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
+            Recent Activities
+          </h2>
           <div className="space-y-4">
             {recentActivities.map((activity) => (
-              <div
+              <motion.div
                 key={activity.id}
-                className="flex items-center gap-4 rounded-lg border border-neutral-100 p-3 dark:border-neutral-700"
+                whileHover={{ scale: 1.01 }}
+                className="group flex items-start gap-4 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-neutral-100 dark:bg-neutral-700">
+                <div className={`rounded-lg p-2.5 ${activity.color} shadow-md transition-transform duration-200 group-hover:scale-110`}>
                   {activity.icon}
                 </div>
                 <div className="flex-1">
@@ -130,55 +145,50 @@ export default function Page() {
                     <p className="font-medium text-neutral-900 dark:text-white">
                       {activity.user}
                     </p>
-                    <span className="flex items-center text-sm text-neutral-500 dark:text-neutral-400">
+                    <span className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
                       <IconClock className="mr-1 h-4 w-4" />
                       {activity.time}
                     </span>
                   </div>
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                    {activity.type === "asset_assigned" && "Assigned"}
-                    {activity.type === "asset_returned" && "Returned"}
-                    {activity.type === "asset_added" && "Added"}
-                    {activity.type === "asset_maintenance" && "Maintenance"} {activity.asset} to {activity.department}
+                  <p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+                    {activity.asset}
+                  </p>
+                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
+                    {activity.department}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        <div className="rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-neutral-900 dark:text-white">
-              Asset Distribution
-            </h3>
-            <button className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">
-              View Details
-            </button>
-          </div>
-          <div className="space-y-6">
-            {assetDistribution.map((item, idx) => (
+        {/* Asset Distribution */}
+        <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+          <h2 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
+            Asset Distribution
+          </h2>
+          <div className="space-y-4">
+            {assetDistribution.map((asset, idx) => (
               <div key={idx} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className={`h-3 w-3 rounded-full ${item.color}`} />
+                    <div className={`rounded-lg bg-gradient-to-r p-2 ${asset.color} shadow-md`}>
+                      {asset.icon}
+                    </div>
                     <span className="font-medium text-neutral-900 dark:text-white">
-                      {item.category}
+                      {asset.category}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                      {item.count} units
-                    </span>
-                    <span className="text-sm font-medium text-neutral-900 dark:text-white">
-                      {item.percentage}%
-                    </span>
-                  </div>
+                  <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                    {asset.count} ({asset.percentage}%)
+                  </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-700">
-                  <div
-                    className={`h-full ${item.color}`}
-                    style={{ width: `${item.percentage}%` }}
+                <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${asset.percentage}%` }}
+                    transition={{ duration: 1, delay: idx * 0.1 }}
+                    className={`h-full rounded-full bg-gradient-to-r ${asset.color}`}
                   />
                 </div>
               </div>

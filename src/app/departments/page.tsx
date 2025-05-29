@@ -145,26 +145,18 @@ export default function DepartmentsPage() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-blue-500 to-indigo-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:shadow-md"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="rounded-lg bg-purple-50 p-1.5 text-purple-600 transition-colors hover:bg-purple-100 dark:bg-purple-900/30 dark:text-purple-400 dark:hover:bg-purple-900/50"
                 >
-                  <span className="relative z-10 flex items-center gap-1.5">
-                    <IconEye className="h-4 w-4" />
-                    View Details
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-indigo-600 to-blue-600 transition-transform duration-300 group-hover:translate-x-0" />
+                  <IconEye className="h-4 w-4" />
                 </motion.button>
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="group relative overflow-hidden rounded-lg bg-gradient-to-r from-[#067957] to-[#0a9c6f] px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:shadow-md"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="rounded-lg bg-[#067957]/10 p-1.5 text-[#067957] transition-colors hover:bg-[#067957]/20 dark:bg-[#067957]/20 dark:text-[#067957] dark:hover:bg-[#067957]/30"
                 >
-                  <span className="relative z-10 flex items-center gap-1.5">
-                    <IconEdit className="h-4 w-4" />
-                    Edit
-                  </span>
-                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-[#0a9c6f] to-[#067957] transition-transform duration-300 group-hover:translate-x-0" />
+                  <IconEdit className="h-4 w-4" />
                 </motion.button>
               </div>
             </div>

@@ -1,69 +1,122 @@
 "use client";
 import React from "react";
 import {
-  IconArrowUpRight,
-  IconClock,
   IconDeviceLaptop,
   IconDeviceMobile,
   IconDeviceTablet,
   IconPrinter,
   IconUsers,
   IconBuilding,
-  IconWallet,
+  IconArrowUp,
+  IconArrowDown,
+  IconPlus,
+  IconUserPlus,
+  IconCalendar,
+  IconFileAnalytics,
+  IconDevices,
+  IconTool,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 
 export default function Page() {
+  const stats = [
+    {
+      title: "Total Assets",
+      value: "1,234",
+      change: "+12.5%",
+      trend: "up",
+      icon: <IconDevices className="h-6 w-6 text-emerald-500" />,
+      color: "bg-emerald-50 dark:bg-emerald-900/30",
+    },
+    {
+      title: "Active Employees",
+      value: "456",
+      change: "+5.2%",
+      trend: "up",
+      icon: <IconUsers className="h-6 w-6 text-blue-500" />,
+      color: "bg-blue-50 dark:bg-blue-900/30",
+    },
+    {
+      title: "Departments",
+      value: "12",
+      change: "+2",
+      trend: "up",
+      icon: <IconBuilding className="h-6 w-6 text-amber-500" />,
+      color: "bg-amber-50 dark:bg-amber-900/30",
+    },
+    {
+      title: "Maintenance Due",
+      value: "23",
+      change: "-8.3%",
+      trend: "down",
+      icon: <IconTool className="h-6 w-6 text-rose-500" />,
+      color: "bg-rose-50 dark:bg-rose-900/30",
+    },
+  ];
+
+  const quickActions = [
+    {
+      title: "Add New Asset",
+      description: "Register a new asset in the system",
+      icon: <IconPlus className="h-6 w-6 text-emerald-500" />,
+      color: "bg-emerald-50 dark:bg-emerald-900/30",
+      href: "/assets/new",
+    },
+    {
+      title: "Assign Asset",
+      description: "Assign assets to employees",
+      icon: <IconUserPlus className="h-6 w-6 text-blue-500" />,
+      color: "bg-blue-50 dark:bg-blue-900/30",
+      href: "/assets/assign",
+    },
+    {
+      title: "Schedule Maintenance",
+      description: "Set up maintenance schedules",
+      icon: <IconCalendar className="h-6 w-6 text-amber-500" />,
+      color: "bg-amber-50 dark:bg-amber-900/30",
+      href: "/maintenance/schedule",
+    },
+    {
+      title: "Generate Report",
+      description: "Create asset management reports",
+      icon: <IconFileAnalytics className="h-6 w-6 text-purple-500" />,
+      color: "bg-purple-50 dark:bg-purple-900/30",
+      href: "/reports/new",
+    },
+  ];
+
   const recentActivities = [
     {
       id: 1,
       type: "asset_assigned",
-      user: "John Doe",
-      asset: "MacBook Pro 2023",
-      department: "Engineering",
+      title: "Asset Assigned",
+      description: "MacBook Pro assigned to John Doe",
       time: "2 hours ago",
-      icon: <IconDeviceLaptop className="h-5 w-5 text-white" />,
-      color: "bg-gradient-to-r from-indigo-500 to-purple-500",
+      icon: <IconDevices className="h-5 w-5 text-emerald-500" />,
     },
     {
       id: 2,
-      type: "asset_returned",
-      user: "Jane Smith",
-      asset: "iPad Pro",
-      department: "Design",
+      type: "maintenance",
+      title: "Maintenance Completed",
+      description: "Server maintenance completed",
       time: "4 hours ago",
-      icon: <IconDeviceTablet className="h-5 w-5 text-white" />,
-      color: "bg-gradient-to-r from-emerald-500 to-teal-500",
+      icon: <IconTool className="h-5 w-5 text-blue-500" />,
     },
     {
       id: 3,
-      type: "asset_added",
-      user: "Mike Johnson",
-      asset: "HP LaserJet Printer",
-      department: "Operations",
+      type: "new_asset",
+      title: "New Asset Added",
+      description: "10 new laptops added to inventory",
       time: "1 day ago",
-      icon: <IconPrinter className="h-5 w-5 text-white" />,
-      color: "bg-gradient-to-r from-rose-500 to-pink-500",
+      icon: <IconPlus className="h-5 w-5 text-amber-500" />,
     },
     {
       id: 4,
-      type: "asset_assigned",
-      user: "Sarah Wilson",
-      asset: "iPhone 14 Pro",
-      department: "Sales",
-      time: "1 day ago",
-      icon: <IconDeviceMobile className="h-5 w-5 text-white" />,
-      color: "bg-gradient-to-r from-blue-500 to-cyan-500",
-    },
-    {
-      id: 5,
-      type: "asset_maintenance",
-      user: "David Brown",
-      asset: "Dell XPS 15",
-      department: "IT",
+      type: "employee",
+      title: "New Employee",
+      description: "Sarah Wilson joined IT department",
       time: "2 days ago",
-      icon: <IconDeviceLaptop className="h-5 w-5 text-white" />,
-      color: "bg-gradient-to-r from-amber-500 to-orange-500",
+      icon: <IconUserPlus className="h-5 w-5 text-purple-500" />,
     },
   ];
 
@@ -100,165 +153,148 @@ export default function Page() {
 
   return (
     <div className="flex h-full w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {[
-          {
-            title: "Total Assets",
-            value: "1,234",
-            change: "+12%",
-            color: "from-indigo-500 to-purple-500",
-            icon: <IconDeviceLaptop className="h-6 w-6 text-white" />,
-            bgColor: "bg-indigo-500 dark:bg-indigo-900",
-          },
-          {
-            title: "Active Users",
-            value: "456",
-            change: "+8%",
-            color: "from-emerald-500 to-teal-500",
-            icon: <IconUsers className="h-6 w-6 text-white" />,
-            bgColor: "bg-emerald-500 dark:bg-emerald-900",
-          },
-          {
-            title: "Departments",
-            value: "12",
-            change: "+2",
-            color: "from-rose-500 to-pink-500",
-            icon: <IconBuilding className="h-6 w-6 text-white" />,
-            bgColor: "bg-rose-500 dark:bg-rose-900",
-          },
-          {
-            title: "Total Value",
-            value: "$2.4M",
-            change: "+15%",
-            color: "from-amber-500 to-orange-500",
-            icon: <IconWallet className="h-6 w-6 text-white" />,
-            bgColor: "bg-amber-500 dark:bg-amber-900",
-          },
-        ].map((stat, idx) => (
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <h1 className="text-2xl font-semibold text-neutral-900 dark:text-white">Dashboard</h1>
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          className="flex items-center gap-2 rounded-lg bg-[#067957] px-4 py-2 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#067957]/90"
+        >
+          <IconPlus className="h-4 w-4" />
+          Quick Add Asset
+        </motion.button>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {stats.map((stat, idx) => (
           <motion.div
             key={idx}
-            whileHover={{ scale: 1.02, y: -5 }}
-            className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all duration-200 hover:shadow-xl dark:bg-neutral-800"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: idx * 0.1 }}
+            className="flex flex-col gap-4 rounded-xl border border-neutral-200 bg-gradient-to-br from-blue-100/80 to-blue-50/50 p-6 shadow-sm dark:from-blue-900/40 dark:to-blue-800/30 dark:border-neutral-700"
           >
-            {/* Background gradient */}
-            <div
-              className="absolute inset-0 bg-gradient-to-br opacity-5"
-              style={{
-                backgroundImage: `linear-gradient(to bottom right, ${
-                  stat.color.split(" ")[1]
-                }, ${stat.color.split(" ")[3]})`,
-              }}
-            />
-
-            {/* Content */}
-            <div className="relative z-10">
-              <div className="flex items-center justify-between">
-                <div className={`rounded-lg p-2 ${stat.bgColor} shadow-sm`}>
-                  {stat.icon}
-                </div>
-                <span className="flex items-center text-sm font-medium text-primary dark:text-primary-light">
-                  <IconArrowUpRight className="mr-1 h-4 w-4" />
-                  {stat.change}
-                </span>
+            <div className="flex items-center justify-between">
+              <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${stat.color}`}>
+                {stat.icon}
               </div>
-
-              <div className="mt-4">
-                <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  {stat.title}
-                </h3>
-                <p className="mt-1 text-2xl font-semibold text-neutral-900 dark:text-white">
-                  {stat.value}
-                </p>
-              </div>
-
-              {/* Hover effect line */}
-              <div
-                className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r transition-all duration-300 group-hover:w-full"
-                style={{
-                  backgroundImage: `linear-gradient(to right, ${
-                    stat.color.split(" ")[1]
-                  }, ${stat.color.split(" ")[3]})`,
-                }}
-              />
+              <span
+                className={`flex items-center gap-1 text-sm font-medium ${
+                  stat.trend === "up" ? "text-emerald-500" : "text-rose-500"
+                }`}
+              >
+                {stat.change}
+                {stat.trend === "up" ? (
+                  <IconArrowUp className="h-4 w-4" />
+                ) : (
+                  <IconArrowDown className="h-4 w-4" />
+                )}
+              </span>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                {stat.title}
+              </h3>
+              <p className="mt-1 text-2xl font-semibold text-neutral-900 dark:text-white">
+                {stat.value}
+              </p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Recent Activities */}
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
-          <h2 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
-            Recent Activities
-          </h2>
-          <div className="space-y-4">
-            {recentActivities.map((activity) => (
-              <motion.div
-                key={activity.id}
-                whileHover={{ scale: 1.01 }}
-                className="group flex items-start gap-4 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-200 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800"
+      {/* Quick Actions and Recent Activities */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 pb-8">
+        {/* Quick Actions */}
+        <div className="flex h-[300px] flex-col gap-4">
+          <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Quick Actions</h2>
+          <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
+            {quickActions.map((action, idx) => (
+              <motion.a
+                key={idx}
+                href={action.href}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: idx * 0.1 }}
+                className="group flex flex-col gap-2 rounded-xl border border-neutral-200 bg-gradient-to-br from-teal-100/80 to-teal-50/50 p-4 shadow-sm transition-all duration-200 hover:border-[#067957] hover:shadow-md dark:from-teal-900/40 dark:to-teal-800/30 dark:border-neutral-700"
               >
-                <div
-                  className={`rounded-lg p-2.5 ${activity.color} shadow-md transition-transform duration-200 group-hover:scale-110`}
-                >
+                <div className={`flex h-10 w-10 items-center justify-center rounded-lg ${action.color}`}>
+                  {action.icon}
+                </div>
+                <div>
+                  <h3 className="font-medium text-neutral-900 dark:text-white">{action.title}</h3>
+                  <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                    {action.description}
+                  </p>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent Activities */}
+        <div className="flex h-[300px] flex-col gap-4">
+          <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Recent Activities</h2>
+          <div className="flex flex-1 flex-col gap-4">
+            {recentActivities.map((activity, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: idx * 0.1 }}
+                className="flex items-start gap-3 rounded-xl border border-neutral-200 bg-gradient-to-br from-emerald-100/80 to-emerald-50/50 p-3 shadow-sm dark:from-emerald-900/40 dark:to-emerald-800/30 dark:border-neutral-700"
+              >
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-neutral-50 dark:bg-neutral-700">
                   {activity.icon}
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <p className="font-medium text-neutral-900 dark:text-white">
-                      {activity.user}
-                    </p>
-                    <span className="flex items-center text-sm text-neutral-600 dark:text-neutral-400">
-                      <IconClock className="mr-1 h-4 w-4" />
+                    <h3 className="text-sm font-medium text-neutral-900 dark:text-white">{activity.title}</h3>
+                    <span className="text-xs text-neutral-500 dark:text-neutral-400">
                       {activity.time}
                     </span>
                   </div>
-                  <p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
-                    {activity.asset}
-                  </p>
-                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">
-                    {activity.department}
+                  <p className="mt-0.5 text-xs text-neutral-600 dark:text-neutral-400">
+                    {activity.description}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Asset Distribution */}
-        <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
-          <h2 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-white">
-            Asset Distribution
-          </h2>
-          <div className="space-y-4">
-            {assetDistribution.map((asset, idx) => (
-              <div key={idx} className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div
-                      className={`rounded-lg bg-gradient-to-r p-2 ${asset.color} shadow-md`}
-                    >
-                      {asset.icon}
-                    </div>
-                    <span className="font-medium text-neutral-900 dark:text-white">
-                      {asset.category}
-                    </span>
-                  </div>
-                  <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                    {asset.count} ({asset.percentage}%)
+      {/* Asset Distribution */}
+      <div className="mt-12 flex flex-col gap-4">
+        <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">Asset Distribution</h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {assetDistribution.map((asset, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: idx * 0.1 }}
+              className="group flex flex-col gap-2 rounded-xl border border-neutral-200 bg-gradient-to-br from-indigo-100/80 to-indigo-50/50 p-4 shadow-sm transition-all duration-200 hover:border-[#067957] hover:shadow-md dark:from-indigo-900/40 dark:to-indigo-800/30 dark:border-neutral-700"
+            >
+              <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${asset.color}`}>
+                {asset.icon}
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                  {asset.category}
+                </h3>
+                <div className="mt-2 flex items-center justify-between">
+                  <p className="text-2xl font-semibold text-neutral-900 dark:text-white">
+                    {asset.count}
+                  </p>
+                  <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                    {asset.percentage}%
                   </span>
                 </div>
-                <div className="h-2 w-full overflow-hidden rounded-full bg-neutral-200 dark:bg-neutral-700">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${asset.percentage}%` }}
-                    transition={{ duration: 1, delay: idx * 0.1 }}
-                    className={`h-full rounded-full bg-gradient-to-r ${asset.color}`}
-                  />
-                </div>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

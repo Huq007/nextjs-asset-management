@@ -2,10 +2,7 @@
 import { cn } from "@/lib/utils";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  IconX,
-  IconMenu2,
-} from "@tabler/icons-react";
+import { IconX, IconMenu2 } from "@tabler/icons-react";
 
 interface Links {
   label: string;
@@ -142,7 +139,7 @@ export const MobileSidebar = ({
               transition={{
                 type: "spring",
                 stiffness: 300,
-                damping: 30
+                damping: 30,
               }}
               className={cn(
                 "fixed h-full w-full inset-0 bg-[#067958]/20 dark:bg-[#067958]/30 backdrop-blur-md p-10 z-[100] flex flex-col justify-between",
@@ -189,11 +186,11 @@ export const SidebarLink = ({
         className={cn(
           "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
           "text-black dark:text-white",
-          "hover:bg-[#067958]/40 dark:hover:bg-[#067958]/40",
+          "hover:bg-white dark:hover:bg-neutral-800",
           "backdrop-blur-sm",
           "before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-r before:from-[#067958]/0 before:to-[#067958]/0",
           "before:transition-all before:duration-300",
-          "hover:before:from-[#067958]/10 hover:before:to-[#067958]/20",
+          "hover:before:from-[#067958]/5 hover:before:to-[#067958]/10",
           "after:absolute after:left-0 after:top-1/2 after:-translate-y-1/2 after:h-0 after:w-1 after:rounded-r-full after:bg-[#067958] after:transition-all after:duration-300",
           "hover:after:h-8",
           "cursor-pointer",
@@ -210,7 +207,11 @@ export const SidebarLink = ({
         </motion.div>
         <motion.span
           animate={{
-            display: animate ? (open ? "inline-block" : "none") : "inline-block",
+            display: animate
+              ? open
+                ? "inline-block"
+                : "none"
+              : "inline-block",
             opacity: animate ? (open ? 1 : 0) : 1,
           }}
           className="truncate"

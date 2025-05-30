@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { IconCalendar, IconChartBar, IconChartLine, IconChartPie } from "@tabler/icons-react";
+import { IconChartBar, IconChartLine, IconChartPie } from "@tabler/icons-react";
 import {
   LineChart,
   Line,
@@ -14,8 +14,23 @@ import {
   Cell,
   BarChart,
   Bar,
-  Legend
+  Legend,
+  BarProps,
+  TooltipProps
 } from "recharts";
+
+interface CustomTooltipProps extends TooltipProps<number, string> {
+  active?: boolean;
+  payload?: Array<{
+    name: string;
+    value: number;
+    payload: {
+      name: string;
+      value: number;
+    };
+  }>;
+  label?: string;
+}
 
 export default function AnalyticsPage() {
   const metrics = [
@@ -67,36 +82,68 @@ export default function AnalyticsPage() {
     { category: "Printers", active: 80, maintenance: 12, inactive: 8 },
   ];
 
-  return (
-    <div className="flex h-full w-full flex-1 flex-col gap-4 rounded-tl-2xl border border-neutral-200 bg-white p-4 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <h1 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-          Analytics
-        </h1>
-        <div className="flex items-center gap-2">
-          <button className="flex items-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700">
-            <IconCalendar className="h-4 w-4" />
-            Last 30 Days
-          </button>
-        </div>
-      </div>
+  const CHART_COLORS = {
+    active: "#067957",
+    maintenance: "#F59E0B",
+    inactive: "#EF4444"
+  };
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+  const CustomBar = (props: BarProps) => {
+    const { x, y, width, height, fill } = props;
+    return (
+      <g>
+        <defs>
+          <linearGradient id={`gradient-${fill}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={fill} stopOpacity={0.8} />
+            <stop offset="100%" stopColor={fill} stopOpacity={0.4} />
+          </linearGradient>
+        </defs>
+        <rect
+          x={x}
+          y={y}
+          width={width}
+          height={height}
+          fill={`url(#gradient-${fill})`}
+          rx={4}
+          ry={4}
+        />
+      </g>
+    );
+  };
+
+  const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="rounded-lg border border-neutral-200 bg-white p-3 shadow-lg dark:border-neutral-700 dark:bg-neutral-800">
+          <p className="font-medium text-neutral-900 dark:text-white">
+            {label}
+          </p>
+          {payload.map((entry, index) => (
+            <p key={index} className="text-sm text-neutral-600 dark:text-neutral-400">
+              {entry.name}: {entry.value}%
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="flex h-full w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
+      <h1 className="text-2xl font-semibold text-neutral-900 dark:text-white">Analytics</h1>
+
+      {/* Metrics Cards */}
+      <div className="grid gap-4 md:grid-cols-3">
         {metrics.map((metric, idx) => (
           <div
             key={idx}
-            className="flex flex-col gap-2 rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800"
+            className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm dark:border-neutral-700 dark:bg-neutral-800"
           >
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                {metric.title}
-              </h3>
-              {metric.icon}
-            </div>
-            <div className="flex items-baseline justify-between">
-              <p className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                {metric.value}
-              </p>
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-700">
+                {metric.icon}
+              </div>
               <span
                 className={`text-sm font-medium ${
                   metric.change.startsWith("+")
@@ -106,6 +153,14 @@ export default function AnalyticsPage() {
               >
                 {metric.change}
               </span>
+            </div>
+            <div className="mt-4">
+              <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                {metric.title}
+              </h3>
+              <p className="mt-1 text-2xl font-semibold text-neutral-900 dark:text-white">
+                {metric.value}
+              </p>
             </div>
           </div>
         ))}
@@ -154,11 +209,13 @@ export default function AnalyticsPage() {
                   data={departmentData}
                   cx="50%"
                   cy="50%"
-                  labelLine={false}
                   outerRadius={80}
                   fill="#8884d8"
                   dataKey="value"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  labelLine={false}
+                  label={({ name, percent }) =>
+                    `${name} ${(percent * 100).toFixed(0)}%`
+                  }
                 >
                   {departmentData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -184,22 +241,50 @@ export default function AnalyticsPage() {
         </h3>
         <div className="h-96 w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={performanceData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
-              <XAxis dataKey="category" stroke="#6B7280" />
-              <YAxis stroke="#6B7280" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "rgba(255, 255, 255, 0.9)",
-                  border: "none",
-                  borderRadius: "0.5rem",
-                  boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-                }}
+            <BarChart
+              data={performanceData}
+              margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+            >
+              <CartesianGrid
+                strokeDasharray="3 3"
+                vertical={false}
+                stroke="rgba(0,0,0,0.1)"
+                strokeWidth={0.5}
               />
+              <XAxis
+                dataKey="category"
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "#6B7280", fontSize: 12 }}
+              />
+              <YAxis
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "#6B7280", fontSize: 12 }}
+              />
+              <Tooltip content={<CustomTooltip />} />
               <Legend />
-              <Bar dataKey="active" name="Active" fill="#067957" />
-              <Bar dataKey="maintenance" name="Maintenance" fill="#F59E0B" />
-              <Bar dataKey="inactive" name="Inactive" fill="#EF4444" />
+              <Bar
+                dataKey="active"
+                name="Active"
+                fill={CHART_COLORS.active}
+                shape={CustomBar}
+                radius={[4, 4, 0, 0]}
+              />
+              <Bar
+                dataKey="maintenance"
+                name="Maintenance"
+                fill={CHART_COLORS.maintenance}
+                shape={CustomBar}
+                radius={[4, 4, 0, 0]}
+              />
+              <Bar
+                dataKey="inactive"
+                name="Inactive"
+                fill={CHART_COLORS.inactive}
+                shape={CustomBar}
+                radius={[4, 4, 0, 0]}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>

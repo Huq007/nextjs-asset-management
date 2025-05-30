@@ -17,6 +17,7 @@ import {
   IconTool,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 import {
   PieChart,
   Pie,
@@ -265,7 +266,7 @@ export default function Page() {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
+    <div className="relative flex h-screen w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
       {/* Background Effects */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl dark:bg-blue-500/20" />
@@ -481,30 +482,25 @@ export default function Page() {
           </h2>
           <div className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
             {quickActions.map((action, idx) => (
-              <motion.a
-                key={idx}
-                href={action.href}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: idx * 0.1 }}
-                className="group relative flex flex-col gap-2 overflow-hidden rounded-xl border border-neutral-200 bg-gradient-to-br from-teal-100/80 to-teal-50/50 p-4 shadow-sm transition-all duration-300 hover:shadow-md dark:from-teal-900/40 dark:to-teal-800/30 dark:border-neutral-700"
-              >
-                <div className="absolute inset-0 -z-10 bg-gradient-to-br from-teal-200/50 to-teal-100/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-teal-800/50 dark:to-teal-900/50" />
-                <div className="absolute -right-10 -top-10 h-20 w-20 rounded-full bg-gradient-to-br from-teal-500/10 to-teal-400/10 blur-xl transition-all duration-300 group-hover:scale-150 dark:from-teal-500/20 dark:to-teal-400/20" />
-                <div
-                  className={`flex h-10 w-10 items-center justify-center rounded-lg ${action.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}
+              <Link key={idx} href={action.href}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex cursor-pointer flex-col gap-3 rounded-xl border border-neutral-200 bg-white p-4 shadow-sm transition-all duration-300 hover:border-[#067957]/20 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800"
                 >
-                  {action.icon}
-                </div>
-                <div>
-                  <h3 className="font-medium text-neutral-900 dark:text-white">
-                    {action.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-                    {action.description}
-                  </p>
-                </div>
-              </motion.a>
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${action.color}`}>
+                    {action.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-neutral-900 dark:text-white">
+                      {action.title}
+                    </h3>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                      {action.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>

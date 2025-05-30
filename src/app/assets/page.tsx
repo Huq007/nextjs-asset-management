@@ -20,6 +20,7 @@ import {
   IconHistory,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 
 interface Asset {
   id: string;
@@ -409,17 +410,17 @@ export default function AssetsPage() {
   return (
     <div className="flex h-full w-full flex-1 flex-col gap-6 rounded-tl-2xl border border-neutral-200 bg-white p-6 md:p-8 dark:border-neutral-700 dark:bg-neutral-900">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <h1 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-          Assets
-        </h1>
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="flex items-center gap-2 rounded-lg bg-[#067957] px-4 py-2 text-sm font-medium text-white shadow-md transition-all duration-200 hover:bg-[#067957]/90"
-        >
-          <IconPlus className="h-4 w-4" />
-          Add Asset
-        </motion.button>
+        <h1 className="text-2xl font-semibold text-neutral-900 dark:text-white">Assets</h1>
+        <Link href="/assets/new">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-[#067957] to-[#0a9c6f] px-4 py-2 text-sm font-medium text-white shadow-md transition-all duration-200 hover:shadow-lg"
+          >
+            <IconPlus className="h-4 w-4" />
+            Add Asset
+          </motion.button>
+        </Link>
       </div>
 
       <div className="flex flex-col gap-4 md:flex-row md:items-center">

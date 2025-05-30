@@ -186,6 +186,12 @@ export default function Page() {
     { name: "Apr", value: 41, color: "#8B5CF6" },
     { name: "May", value: 48, color: "#EC4899" },
     { name: "Jun", value: 55, color: "#14B8A6" },
+    { name: "Jul", value: 62, color: "#EF4444" },
+    { name: "Aug", value: 58, color: "#6366F1" },
+    { name: "Sep", value: 51, color: "#F97316" },
+    { name: "Oct", value: 47, color: "#06B6D4" },
+    { name: "Nov", value: 43, color: "#A855F7" },
+    { name: "Dec", value: 49, color: "#22C55E" }
   ];
 
   const CHART_COLORS = [
@@ -195,6 +201,12 @@ export default function Page() {
     "#8B5CF6", // Purple
     "#EC4899", // Pink
     "#14B8A6", // Teal
+    "#EF4444", // Red
+    "#6366F1", // Indigo
+    "#F97316", // Orange
+    "#06B6D4", // Cyan
+    "#A855F7", // Violet
+    "#22C55E"  // Emerald
   ];
 
   const CustomBar = (props: BarProps) => {
@@ -336,7 +348,7 @@ export default function Page() {
       </div>
 
       {/* Charts Section */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Asset Distribution Pie Chart */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -375,6 +387,40 @@ export default function Page() {
             </ResponsiveContainer>
           </div>
         </motion.div>
+
+        {/* Asset Distribution Cards */}
+        <div className="grid grid-cols-2 gap-4">
+          {assetDistribution.map((asset, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: idx * 0.1 }}
+              className="group relative flex flex-col gap-2 overflow-hidden rounded-xl border border-neutral-200 bg-gradient-to-br from-indigo-100/80 to-indigo-50/50 p-4 shadow-sm transition-all duration-300 hover:shadow-md dark:from-indigo-900/40 dark:to-indigo-800/30 dark:border-neutral-700"
+            >
+              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-200/50 to-indigo-100/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-indigo-800/50 dark:to-indigo-900/50" />
+              <div className="absolute -right-10 -top-10 h-20 w-20 rounded-full bg-gradient-to-br from-indigo-500/10 to-indigo-400/10 blur-xl transition-all duration-300 group-hover:scale-150 dark:from-indigo-500/20 dark:to-indigo-400/20" />
+              <div
+                className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${asset.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}
+              >
+                {asset.icon}
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                  {asset.category}
+                </h3>
+                <div className="mt-2 flex items-center justify-between">
+                  <p className="text-2xl font-semibold text-neutral-900 dark:text-white">
+                    {asset.count}
+                  </p>
+                  <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                    {asset.percentage}%
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Monthly Asset Acquisitions Bar Chart */}
         <motion.div
@@ -498,45 +544,6 @@ export default function Page() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Asset Distribution Cards */}
-      <div className="mt-12 flex flex-col gap-4">
-        <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">
-          Asset Distribution
-        </h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {assetDistribution.map((asset, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: idx * 0.1 }}
-              className="group relative flex flex-col gap-2 overflow-hidden rounded-xl border border-neutral-200 bg-gradient-to-br from-indigo-100/80 to-indigo-50/50 p-4 shadow-sm transition-all duration-300 hover:shadow-md dark:from-indigo-900/40 dark:to-indigo-800/30 dark:border-neutral-700"
-            >
-              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-indigo-200/50 to-indigo-100/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:from-indigo-800/50 dark:to-indigo-900/50" />
-              <div className="absolute -right-10 -top-10 h-20 w-20 rounded-full bg-gradient-to-br from-indigo-500/10 to-indigo-400/10 blur-xl transition-all duration-300 group-hover:scale-150 dark:from-indigo-500/20 dark:to-indigo-400/20" />
-              <div
-                className={`flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${asset.color} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}
-              >
-                {asset.icon}
-              </div>
-              <div>
-                <h3 className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                  {asset.category}
-                </h3>
-                <div className="mt-2 flex items-center justify-between">
-                  <p className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                    {asset.count}
-                  </p>
-                  <span className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
-                    {asset.percentage}%
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
         </div>
       </div>
     </div>
